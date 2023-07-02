@@ -19,13 +19,13 @@ function StackGroup()
 
 export default function App() {
   return (
-    // <NavigationContainer>
-    //   <StackGroup />
-    // </NavigationContainer>
+    <NavigationContainer>
+      <StackGroup />
+    </NavigationContainer>
 
-    <View style={styles.container}>
-      <AddData />
-    </View>
+    // <View style={styles.container}>
+    //   <AddData />
+    // </View>
   );
 }
 

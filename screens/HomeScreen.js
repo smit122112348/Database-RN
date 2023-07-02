@@ -1,7 +1,8 @@
-import { useState } from "react";
 import { Button, FlatList, View } from "react-native";
-import { SafeAreaView, Text, TextInput } from "react-native";
-import { storeGoal } from "../http";
+import { SafeAreaView, Text, TextInput, StyleSheet } from "react-native";
+import { db } from "../src/config";
+import React, { useState } from "react";
+import { ref, set } from "firebase/database";
 
 export default function HomeScreen()
 {
@@ -19,13 +20,16 @@ export default function HomeScreen()
             name: currentGoal.text
         }
 
-        storeGoal(newGoal);
+        set(ref(db, 'posts/' + currentGoal), {
+            goal: currentGoal
+        });
+        setCurrentGoal("")
     }
 
     return (
         <SafeAreaView>
             <View>
-                <TextInput placeholder="Add you Goal here" onChangeText={setCurrentGoal} value={currentGoal}/>
+                <TextInput style={styles.inputs} placeholder="Add you Goal here" onChangeText={setCurrentGoal} value={currentGoal}/>
                 <Button title="Add Goal" onPress={addButtonHandler}/>
             </View>
             <View>
@@ -43,3 +47,20 @@ export default function HomeScreen()
         </SafeAreaView>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+
+    inputs: {
+        margin: 10,
+        fontSize: 22,
+        fontWeight: "bold",
+        padding: 10
+    },
+
+  });
