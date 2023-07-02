@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import { View } from 'react-native';
-import { FetchData } from './src';
+import { AddData } from './src';
 
 const Stack = createStackNavigator();
 function StackGroup()
@@ -24,7 +24,7 @@ export default function App() {
     // </NavigationContainer>
 
     <View style={styles.container}>
-      <FetchData />
+      <AddData />
     </View>
   );
 }
