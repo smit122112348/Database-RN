@@ -1,8 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
+import { View } from 'react-native';
+import { FetchData } from './src';
 
 const Stack = createStackNavigator();
 function StackGroup()
@@ -17,17 +19,18 @@ function StackGroup()
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <StackGroup />
-    </NavigationContainer>
+    // <NavigationContainer>
+    //   <StackGroup />
+    // </NavigationContainer>
+
+    <View style={styles.container}>
+      <FetchData />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

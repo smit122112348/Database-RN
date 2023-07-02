@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button, FlatList, View } from "react-native";
 import { SafeAreaView, Text, TextInput } from "react-native";
+import { storeGoal } from "../http";
 
 export default function HomeScreen()
 {
@@ -13,6 +14,12 @@ export default function HomeScreen()
             text: currentGoal,
             id: Math.random().toString()
         }]);
+
+        var newGoal = {
+            name: currentGoal.text
+        }
+
+        storeGoal(newGoal);
     }
 
     return (
