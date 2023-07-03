@@ -2,10 +2,7 @@ import { Button, FlatList, View } from "react-native";
 import { SafeAreaView, Text, TextInput, StyleSheet } from "react-native";
 import { db } from "../src/config";
 import React, { useState, useEffect } from "react";
-import { ref, set, onValue, remove } from "firebase/database";
-
-
-
+import { ref, set, onValue, remove, push} from "firebase/database";
 
 export default function HomeScreen()
 {
@@ -20,10 +17,14 @@ export default function HomeScreen()
         const starCountRef = ref(db, 'posts/');
         onValue(starCountRef, (snapshot) => {
             const data = snapshot.val();
-            const newPosts = Object.keys(data).map(key => ({
+            var newPosts = null;
+           if(data)
+           {
+            newPosts = Object.keys(data).map(key => ({
                 id: key,
                 ...data[key]
             }));
+           }
             console.log(newPosts);
             setGoalData(newPosts);
         });
@@ -56,7 +57,7 @@ export default function HomeScreen()
 
     function addButtonHandler()
     {
-        set(ref(db, 'posts/' + currentGoal), {
+        push(ref(db, 'posts/'), {
             goal: currentGoal
         }).then();
         setCurrentGoal("");
